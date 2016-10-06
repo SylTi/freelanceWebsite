@@ -9,7 +9,16 @@ var config = {
       name: 'server'
     },
     port: process.env.PORT || 3000,
-    db: 'mysql://root:root@localhost/freelanceWebsite'
+    db: 'mysql://root:root@192.168.0.42/freelanceWebsite'
+  },
+
+  debug: {
+    root: rootPath,
+    app: {
+      name: 'server'
+    },
+    port: process.env.PORT || 3000,
+    db: 'mysql://root:root@192.168.0.42/freelanceWebsite'
   },
 
   test: {

@@ -1,0 +1,11 @@
+{
+    "name": "BlogApp",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "build-client": "cd client && ng build && mv dist/index.html dist/home.html",
+        "launch-server": "cd server && gulp",
+        "lint-client": "cd client && ng lint",
+        "start": "npm run lint-client && npm run build-client && npm run launch-server"
+    }
+}
