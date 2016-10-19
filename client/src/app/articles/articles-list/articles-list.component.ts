@@ -41,6 +41,8 @@ export class ArticlesListComponent implements OnInit {
 
     getText(text: string): string {
         let length = Math.round(text.length * 0.3);
+        if (length >= 300)
+            length = 300;
         return text.substring(0, length) + ' ...';
     }
 
