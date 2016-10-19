@@ -49,6 +49,10 @@ router.post('/send_mail', function(req, res) {
     });
 });
 
+router.get('/robot.txt', function(req, res) {
+    res.sendFile(path.resolve(__dirname+'/../../../site/robot.txt'));
+});
+
 router.get('*', function(req, res) {
     getHomePage(res);
 });
