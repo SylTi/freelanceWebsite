@@ -1,0 +1,130 @@
+# -*- mode: ruby -*-
+      # vi: set ft=ruby :
+
+      Vagrant.configure(2) do |config|
+        # Every Vagrant development environment requires a box. You can search for
+        # boxes at https://atlas.hashicorp.com/search.
+        config.vm.box = "ubuntu/trusty64"
+
+        # Create a forwarded port mapping which allows access to a specific port
+        # within the machine from a port on the host machine. In the example below,
+        # accessing "localhost:8080" will access port 80 on the guest machine.
+        config.vm.network "forwarded_port", guest: 80, host: 8080
+
+
+        # Create a private network, which allows host-only access to the machine
+        # using a specific IP.
+        config.vm.network "private_network", ip: "192.168.0.42"
+
+        # Provider-specific configuration so you can fine-tune various
+        # backing providers for Vagrant. These expose provider-specific options.
+        config.vm.provider "virtualbox" do |vb|
+           # Customize the amount of memory on the VM:
+           vb.memory = "1024"
+        end
+
+        $rootScript = <<-SHELL
+          echo "Provision Starting !"
+
+          # MySQL and PhpMyAdmin configuration
+          debconf-set-selections <<< 'mysql-server mysql-server/root_password password YourRootPass'
+          debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password YourRootPass'
+          debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean true"
+          debconf-set-selections <<< "phpmyadmin phpmyadmin/app-password-confirm password YourRootPass"
+          debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/admin-pass password YourRootPass"
+          debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password YourRootPass"
+          debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none"
+
+          apt-get update
+
+          apt-get -y install vim emacs curl build-essential python-software-properties git > /dev/null 2>&1
+          apt-get install -y apache2 > /dev/null 2>&1
+          apt-get install -y mysql-server > /dev/null 2>&1
+          apt-get install -y php5 > /dev/null 2>&1
+          apt-get install -y php5-cli php5-common php5-imagick php5-mcrypt php5-imap php5-gd libapache2-mod-php5 php5-mysql php5-curl > /dev/null 2>&1
+          apt-get install -y phpmyadmin > /dev/null 2>&1
+          apt-get install -y ssmtp > /dev/null 2>&1
+          apt-get install -y autoconf automake build-essential python-dev > /dev/null 2>&1
+
+          a2enmod rewrite > /dev/null 2>&1
+
+          service apache2 reload
+
+          if ! [ -L /var/www ]; then
+            rm -rf /var/www
+            ln -fs /vagrant /var/www
+          fi
+
+          # Configuration
+          sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
+          sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
+
+          # size of swapfile in megabytes
+          swapsize=8000
+
+          # does the swap file already exist?
+          grep -q "swapfile" /etc/fstab
+
+          # if not then create it
+          if [ $? -ne 0 ]; then
+            echo 'swapfile not found. Adding swapfile.'
+            fallocate -l ${swapsize}M /swapfilecode 
+            chmod 600 /swapfile
+            mkswap /swapfile
+            swapon /swapfile
+            echo '/swapfile none swap defaults 0 0' >> /etc/fstab
+          else
+            echo 'swapfile found. No changes made.'
+          fi
+
+          # Configuring mail server
+          echo "root=yourGmailAddress@gmail.com" > /etc/ssmtp/ssmtp.conf
+          echo "mailhub=smtp.gmail.com:587" >> /etc/ssmtp/ssmtp.conf
+          echo "rewriteDomain=gmail.com" >> /etc/ssmtp/ssmtp.conf
+          echo "hostname=localhost" >> /etc/ssmtp/ssmtp.conf
+          echo "UseTLS=YES" >> /etc/ssmtp/ssmtp.conf
+          echo "UseSTARTTLS=YES" >> /etc/ssmtp/ssmtp.conf
+          echo "AuthUser=user.name" >> /etc/ssmtp/ssmtp.conf
+          echo "AuthPass=youPasswordOrAuthTokenIfUsing2Steps" >> /etc/ssmtp/ssmtp.conf
+          echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf
+
+          echo "root:yourEmail@gmail.com:smtp.gmail.com:587" > /etc/ssmtp/revaliases
+          echo "vagrant:yourEmail@gmail.com:smtp.gmail.com:587" >> /etc/ssmtp/revaliases
+          echo "www-data:yourEmail@gmail.com:smtp.gmail.com:587" >> /etc/ssmtp/revaliases
+
+          echo "sendmail_path = /usr/sbin/ssmtp -t" >> /etc/php5/apache2/php.ini
+          echo "sendmail_path = /usr/sbin/ssmtp -t" >> /etc/php5/cli/php.ini
+
+          service apache2 restart
+
+        SHELL
+
+        $userScript = <<-SHELL
+          # Installing nvm & node
+          curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+          echo "source $HOME/.nvm/nvm.sh" >> /home/vagrant/.profile
+          source /home/vagrant/.profile
+          nvm install 6.8.1
+          nvm alias default 6.8.1
+
+          # Installing npm modules
+          npm install -g bower yarn grunt-cli jasmine mocha karma karma-cli protractor pm2 yo gulp-cli generator-angular-fullstack typescript@next typings angular-cli babel-cli generator-express webpack-dev-server rimraf webpack tslint
+
+          # Adding alias
+          echo "alias la='ls -la'" >> /home/vagrant/.profile
+          echo "alias cdv='cd /vagrant'" >> /home/vagrant/.profile
+
+          # Installing watchman
+          cd /vagrant/watchman
+          ./autogen.sh > /dev/null 2>&1
+          make > /dev/null 2>&1
+          sudo make install > /dev/null 2>&1
+
+          echo "Provision Finished !"
+        SHELL
+
+        # Enable provisioning with two shell script. 
+        config.vm.provision "shell", inline: $rootScript
+        config.vm.provision "shell", inline: $userScript, privileged: false
+
+      end

@@ -808,9 +808,11 @@ textarea.form-control {
 /*---------------*/
 
 figure.effect-bubba {
-    background: #9e5406;
+    background: #9e5406; /* f5f5f5*/
 }
-
+/*figure.effect-bubba:hover {*/
+    /*background: #9e5406;*/
+/*}*/
 figure.effect-bubba img {
     opacity: 0.7;
     -webkit-transition: opacity 0.35s;
@@ -1028,6 +1030,7 @@ figure > img {
     max-height: 225px;
     min-height: 225px;
     height: 225px;
+    /*object-fit: contain;*/
 }
 
 /* modal image*/

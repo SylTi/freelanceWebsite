@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { Article } from './../../articles';
 import { ArticlesService } from './../articles.service';
@@ -22,12 +23,16 @@ export class ArticlesListComponent implements OnInit {
     bigCurrentPage: number = 1;
 
     constructor(
-        private articlesService: ArticlesService
+        private articlesService: ArticlesService,
+        private titleService: Title
     ) {}
 
     private getArticles(): void {
         this.articlesService.getArticles()
-            .then((articles) => this.articles = articles);
+            .then(
+                (articles) => this.articles = articles,
+                this.handleError
+            );
     }
 
     getDate(date: string): string {
@@ -48,7 +53,12 @@ export class ArticlesListComponent implements OnInit {
         console.log('Number items per page: ' + event.itemsPerPage);
     };
 
+    private handleError(error) {
+        console.error(error);
+    }
+
     ngOnInit() {
+        this.titleService.setTitle('SylTi\'s Blog - Articles list');
         this.getArticles();
         console.log('articles: ', this.articles);
     }

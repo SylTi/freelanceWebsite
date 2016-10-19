@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ArticlesService } from './../articles.service';
 import { Article } from './../article';
@@ -15,17 +16,21 @@ import * as moment from 'moment';
 })
 export class ArticleDetailsComponent implements OnInit {
     article: Article;
+    slug: string;
 
     constructor(private articlesService: ArticlesService,
-                private route: ActivatedRoute
+                private route: ActivatedRoute,
+                private titleService: Title
     ) { }
 
     private getArticle(id: string): void {
         this.articlesService.getArticle(id)
             .take(1)
             .subscribe(
-                (article) => this.article = article,
-                (err) => this.handleError(err)
+                (article) => {
+                    this.article = article;
+                    this.titleService.setTitle('SylTi\'s Blog - ' + article.title);
+                }, (err) => this.handleError(err)
             );
     }
 
@@ -34,8 +39,6 @@ export class ArticleDetailsComponent implements OnInit {
         // return Observable.throw(error.json().error || 'Server error');
     }
 
-
-
     getDate(date: string): string {
         return moment(date).format('MMMM DD, YYYY');
     }
@@ -43,8 +46,8 @@ export class ArticleDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             // let id = +params['id']; // convert string into number
-            let id =  params['id'];
-            this.getArticle(id);
+            this.slug =  params['id'];
+            this.getArticle(this.slug);
         });
     }
 
