@@ -1,7 +1,5 @@
-<div class="col-sm-8 blog-main">
-  <div class="blog-post">
-    <h2 class="blog-post-title">{{ article?.title }}</h2>
-    <p class="blog-post-meta">{{ getDate(article?.createdAt) }} by <a href="#">Sylvain</a></p>
-    <p [innerHTML]="article?.text"></p>
-  </div>
+<div class="blog-post">
+  <h2 class="blog-post-title">{{ article?.title }}</h2>
+  <p class="blog-post-meta">{{ getDate(article?.createdAt) }} by <a href="#">Sylvain</a></p>
+  <p [innerHTML]="article?.text"></p>
 </div>

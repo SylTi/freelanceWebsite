@@ -1,23 +1,29 @@
 <app-navbar></app-navbar>
 
 <div class="blog-header margin-fixed">
-    <div class="container">
-        <h1 class="blog-title">Sylvain's Blog</h1>
-        <p class="lead blog-description">Learn more about web technologies through articles, tutorials and study cases.</p>
+  <div class="container-fluid">
+    <div class="offset-lg-1">
+      <h1 class="blog-title">Sylvain's Blog</h1>
+      <p class="lead blog-description">Learn more about web technologies through articles, tutorials and study cases.</p>
     </div>
+  </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <router-outlet></router-outlet>
-        <app-sidebar></app-sidebar>
+<div class="container-fluid container-margin">
+  <div class="row">
+    <div class="col-lg-7 offset-lg-1">
+      <router-outlet></router-outlet>
     </div>
+    <div class="col-lg-2 offset-lg-1 blog-sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+  </div>
 </div>
 
 <footer class="blog-footer">
-    <p>Blog built with <a href="http://v4-alpha.getbootstrap.com">Bootstrap 4</a> & <a href="https://angular.io">Angular 2</a>.</p>
-    <p>
-        <a href="javascript:void(0)" (click)="scrollTop()">Back to top</a>
-    </p>
+  <p>Blog built with <a href="http://v4-alpha.getbootstrap.com">Bootstrap 4</a> & <a href="https://angular.io">Angular 2</a>.</p>
+  <p>
+    <a href="javascript:void(0)" (click)="scrollTop()">Back to top</a>
+  </p>
 </footer>
 

@@ -1,23 +1,21 @@
-<div class="col-sm-8 blog-main">
-    <div *ngFor="let article of articles">
-        <div class="blog-post">
-            <h2 class="blog-post-title"><a [routerLink]="['/articles', article.titleSlug]">{{ article.title }}</a></h2>
-            <p class="blog-post-meta">{{ getDate(article.createdAt) }} by <a href="#">Sylvain</a></p>
-            <p [innerHTML]="getText(article.text)" class="partial-hide"></p>
-            <div class="row">
-                <div class="col-lg-3 offset-lg-4"><a class="btn btn-lg btn-outline-info" [routerLink]="['/articles', article.titleSlug]">Read more</a></div>
-            </div>
+<div *ngFor="let article of articles">
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a [routerLink]="['/articles', article.titleSlug]">{{ article.title }}</a></h2>
+        <p class="blog-post-meta">{{ getDate(article.createdAt) }} by <a href="#">Sylvain</a></p>
+        <p [innerHTML]="getText(article.text)" class="partial-hide"></p>
+        <div class="row">
+            <div class="col-lg-3 offset-lg-4"><a class="btn btn-lg btn-outline-info" [routerLink]="['/articles', article.titleSlug]">Read more</a></div>
         </div>
     </div>
-    <!--<pager-->
-            <!--[totalItems]="totalItems"-->
-            <!--[(ngModel)]="currentPage"-->
-            <!--(pageChanged)="pageChanged($event)"-->
-            <!--previousText="Older"-->
-            <!--nextText="Newer"-->
-    <!--&gt;<div>test<b>lol</b></div></pager>-->
-    <!--<nav class="blog-pagination">-->
-        <!--<a class="btn btn-outline-primary" href="#">Older</a>-->
-        <!--<a class="btn btn-outline-secondary disabled" href="#">Newer</a>-->
-    <!--</nav>-->
 </div>
+<!--<pager-->
+<!--[totalItems]="totalItems"-->
+<!--[(ngModel)]="currentPage"-->
+<!--(pageChanged)="pageChanged($event)"-->
+<!--previousText="Older"-->
+<!--nextText="Newer"-->
+<!--&gt;<div>test<b>lol</b></div></pager>-->
+<!--<nav class="blog-pagination">-->
+<!--<a class="btn btn-outline-primary" href="#">Older</a>-->
+<!--<a class="btn btn-outline-secondary disabled" href="#">Newer</a>-->
+<!--</nav>-->
