@@ -17,8 +17,8 @@ db.sequelize
         if (process.env.NODE_ENV === 'production') {
 
             var options = {
-                cert: fs.readFileSync('./tls/cert.pem'),
-                key: fs.readFileSync('./tls/key.pem')
+                cert: fs.readFileSync(__dirname+'/tls/cert.pem'),
+                key: fs.readFileSync(__dirname+'/tls/key.pem')
             };
             var serverHttps = https.createServer(
                 options,
