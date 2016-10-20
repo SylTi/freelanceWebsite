@@ -20,7 +20,8 @@ module.exports = function(app, config) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
-    app.use(forceSSL);
+    if (env === 'production')
+        app.use(forceSSL);
     app.use(cookieParser());
     app.use(compress());
     // app.use(express.static(config.root + '/public'));
