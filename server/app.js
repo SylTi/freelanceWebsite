@@ -7,7 +7,7 @@ var express = require('express'),
 var app = express();
 
 require('./config/express')(app, config);
-
+// @todo add https
 db.sequelize
   .sync(/*{force: true}*/)
   .then(function () {
