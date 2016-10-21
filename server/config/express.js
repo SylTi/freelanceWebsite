@@ -26,7 +26,7 @@ module.exports = function(app, config) {
     app.use(compress());
     // app.use(express.static(config.root + '/public'));
     app.use(express.static(__dirname+'/../../client/dist'));
-    app.use('/assets',express.static(__dirname+'/../../site/assets'));
+    app.use('/assets',express.static(__dirname+'/../../site/assets', { maxAge: '2h' }));
     app.use(methodOverride());
 
     var controllers = glob.sync(config.root + '/app/controllers/*.js');
