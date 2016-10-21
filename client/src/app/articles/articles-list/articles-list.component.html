@@ -1,7 +1,7 @@
 <div *ngFor="let article of articles">
     <div class="blog-post">
         <h2 class="blog-post-title"><a [routerLink]="['/articles', article.titleSlug]">{{ article.title }}</a></h2>
-        <p class="blog-post-meta">{{ getDate(article.createdAt) }} by <a href="#">Sylvain</a></p>
+        <p class="blog-post-meta">{{ getDate(article.createdAt) }} by <b>Sylvain</b></p>
         <p [innerHTML]="getText(article.text)" class="partial-hide"></p>
         <div class="row">
             <div class="col-lg-3 offset-lg-4"><a class="btn btn-lg btn-outline-info" [routerLink]="['/articles', article.titleSlug]">Read more</a></div>
