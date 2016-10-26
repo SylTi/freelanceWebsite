@@ -130,6 +130,23 @@
 			return pattern.test(emailAddress);
 		};
 
+
+		/* Switching form */
+
+		$('#c_what').on("change", function(event) {
+			if (this.value === 'Project proposal')
+			{
+				$('.survey').show(400);
+				$('.reaching-form').hide(400);
+			}
+			else
+			{
+				$('.survey').hide(400);
+				$('.reaching-form').show(400);
+			}
+		});
+
+
 		/* ---------------------------------------------- /*
 		 * Contact form ajax
 		/* ---------------------------------------------- */
