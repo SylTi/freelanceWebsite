@@ -1,0 +1,51 @@
+<form>
+  <div class="col-xs-12 col-md-10 offset-md-1 cards-holder">
+    <div class="col-xs-12 col-md-12 h5 form-subtitle text-primary">{{ getCurrentStep().title | translate }}</div>
+    <div *ngFor="let item of  getCurrentStepItems(); let last = last; let index = index">
+      <div *ngIf="getCurrentStepType() === 'card'" [@isVisibleChanged]="getCurrentStepType() === 'card'">
+        <div class="col-xs-12 {{ getBootStrapClass() }} card-holder" [ngClass]="last === true ? 'card-holder-last' : ''">
+          <!--<div class="col-xs-12 col-md-3 card-holder" [ngClass]="{'card-holder-last': last === true, getBootStrapClass(): true}">-->
+          <div class="card text-xs-center"
+               [ngClass]="clickedCard === item.title ? 'selected-card' : ''"
+               (click)="clickCard(item.title)">
+            <div class="card-block">
+              <h4 class="card-title">{{ item.title | translate }}</h4>
+              <i class="fa fa-5x" [ngClass]="item.icon" aria-hidden="true"></i>
+              <p class="card-text">
+                <i class="fa fa-question-circle fa-2x"
+                   tooltipPlacement="bottom" tooltip="{{ item.tooltip | translate }}"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 offset-md-3 question-holder question-{{ index }}" *ngIf="getCurrentStepType() === 'question'" [@isVisibleChanged]="getCurrentStepType() === 'question'">
+        <div class="form-group">
+          <div class="col-md-10">
+            <label for="question-{{ index }}" class="question-title h6 bold">{{ item.title | translate }}</label>
+            <i class="fa fa-question-circle"
+               tooltipPlacement="right" tooltipHtml="{{ item.tooltip | translate }}" *ngIf="item.tooltip !== ''"></i>
+          </div>
+          <div class="col-md-6">
+            <input type="number" id="question-{{ index }}" placeholder="{{ item.placeholder | translate }}"
+                   class="question-input form-control" min="0"
+                   [(ngModel)]="results[getCurrentStep().level][index]" name="{{ item.title }}" required />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 bg-primary text-white h4 steps">
+      <div class="col-xs-12 col-md-2 steps-number">{{ 'STEP' | translate }} {{ currentStep }} {{ 'OF' | translate }} {{ getNumberOfSteps() }}</div>
+      <div class="col-xs-12 col-md-7 offset-md-2 steps-text" *ngIf="clickedCard === '' && currentStep !== getNumberOfSteps()">{{ 'Select one option above to get started' | translate }}</div>
+      <div class="col-xs-12 col-md-2 offset-md-8 steps-button" *ngIf="clickedCard !== '' && currentStep !== getNumberOfSteps()">
+        <button class="btn btn-secondary" (click)="nextStep()" *ngIf="currentStep === (getNumberOfSteps() - 1)" [@flyInOut]="currentStep === (getNumberOfSteps() - 1)">{{ 'Go to Final Step >' | translate }}</button>
+        <button class="btn btn-secondary" (click)="nextStep()" *ngIf="(currentStep !== (getNumberOfSteps() - 1) && currentStep !== getNumberOfSteps())" [@flyInOut]="(currentStep !== (getNumberOfSteps() - 1) && currentStep !== getNumberOfSteps())">{{ 'Go to Next Step >' | translate }}</button>
+      </div>
+      <div class="col-xs-12 col-md-7 offset-md-2 steps-text" *ngIf="(clickedCard === '' && !checkQuestions())&& currentStep === getNumberOfSteps() && getCurrentStepType() !== 'question'">{{ 'Select one option above to see your suggested offers' | translate }}</div>
+      <div class="col-xs-12 col-md-7 offset-md-2 steps-text" *ngIf="(clickedCard === '' && !checkQuestions())&& currentStep === getNumberOfSteps() && getCurrentStepType() === 'question'">{{ 'Respond to the questions above to see your suggested offers' | translate }}</div>
+      <div class="col-xs-12 col-md-2 offset-md-7 steps-button" *ngIf="(clickedCard !== '' || checkQuestions()) && currentStep === getNumberOfSteps()">
+        <button class="btn btn-secondary" (click)="nextStep()" *ngIf="currentStep === getNumberOfSteps()">{{ 'See my suggested offers >' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</form>

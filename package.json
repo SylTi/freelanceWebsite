@@ -7,7 +7,7 @@
         "installs:client": "cd client && npm install",
         "installs:server": "cd server && npm install",
         "build-client:dev": "cd client && ng build && mv dist/index.html dist/home.html",
-        "build-client:prod": "cd client && ng build --prod && mv dist/index.html dist/home.html",
+        "build-client:prod": "cd client && ng build --prod --aot && mv dist/index.html dist/home.html",
         "launch-server:dev": "cd server && gulp",
         "launch-server:prod": "pm2 start server/app.js",
         "lint:client": "cd client && ng lint",

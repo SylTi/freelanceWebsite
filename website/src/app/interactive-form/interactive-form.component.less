@@ -1,0 +1,144 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700,800);
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+
+@colored-card: #E0E0E0;
+@background: #F8F8F8;
+
+body {
+    font: 300 13px/1.8 'Raleway', sans-serif;
+    color: #666;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .h4 {
+    font: 700 40px/1.2 Raleway, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    //margin: 5px 0 5px;
+    color: #222;
+}
+h2 {
+    font-size: 30px;
+    margin: 0 0 30px;
+}
+
+h3 {
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin: 0 0 5px;
+}
+
+h4, .h4 {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.h4 {
+    text-transform: none;
+}
+
+.h5 {
+    font-family: 'Raleway', sans-serif;
+    //letter-spacing: 1px;
+}
+h5 {
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+h6 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+.form-title {
+    margin: 25px 0px;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.form-subtitle
+{
+    margin-top: 25px;
+    padding-left: 4rem;
+}
+
+.cards-holder {
+    background-color: @background;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.card-holder
+{
+    padding-right: 0;
+
+    &.card-holder-last {
+        padding-right: 15px;
+    }
+}
+
+.card {
+    cursor: pointer;
+    margin-top: 25px;
+    &:hover {
+        background-color: @colored-card;
+    }
+}
+
+.card-text {
+    margin-top: 15px;
+}
+
+.selected-card {
+    background-color: @colored-card;
+}
+
+.steps {
+    padding: 30px 30px;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.steps-number, .steps-text {
+    margin-top: 5px;
+}
+
+.steps-text {
+    padding-bottom: 14px;
+}
+
+.steps-button {
+    margin-bottom: 5.5px;
+}
+
+.fa {
+    margin-right: 5px;
+}
+
+
+@media (max-width: 768px) {
+
+    .form-title {
+        padding-left: 15px;
+    }
+
+    .form-subtitle {
+        padding-left: 25px;
+    }
+
+    .card-holder {
+        padding-right: 15px;
+    }
+
+    .steps-number {
+        margin-bottom: 10px;
+    }
+
+    .form-bottom {
+        margin-bottom: 10px;
+    }
+}
