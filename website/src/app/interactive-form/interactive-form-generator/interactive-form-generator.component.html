@@ -1,10 +1,9 @@
 <form>
   <div class="col-xs-12 col-md-10 offset-md-1 cards-holder">
-    <div class="col-xs-12 col-md-12 h5 form-subtitle text-primary">{{ getCurrentStep().title | translate }}</div>
+    <div class="col-xs-12 col-md-12 h4 form-subtitle text-primary">{{ getCurrentStep().title | translate }}</div>
     <div *ngFor="let item of  getCurrentStepItems(); let last = last; let index = index">
       <div *ngIf="getCurrentStepType() === 'card'" [@isVisibleChanged]="getCurrentStepType() === 'card'">
-        <div class="col-xs-12 {{ getBootStrapClass() }} card-holder" [ngClass]="last === true ? 'card-holder-last' : ''">
-          <!--<div class="col-xs-12 col-md-3 card-holder" [ngClass]="{'card-holder-last': last === true, getBootStrapClass(): true}">-->
+        <div class="col-xs-12 col-md-6 {{ getBootStrapClass() }} card-holder" [ngClass]="last === true ? 'card-holder-last' : ''">
           <div class="card text-xs-center"
                [ngClass]="clickedCard === item.title ? 'selected-card' : ''"
                (click)="clickCard(item.title)">
@@ -44,7 +43,7 @@
       <div class="col-xs-12 col-md-7 offset-md-2 steps-text" *ngIf="(clickedCard === '' && !checkQuestions())&& currentStep === getNumberOfSteps() && getCurrentStepType() !== 'question'">{{ 'Select one option above to see your suggested offers' | translate }}</div>
       <div class="col-xs-12 col-md-7 offset-md-2 steps-text" *ngIf="(clickedCard === '' && !checkQuestions())&& currentStep === getNumberOfSteps() && getCurrentStepType() === 'question'">{{ 'Respond to the questions above to see your suggested offers' | translate }}</div>
       <div class="col-xs-12 col-md-2 offset-md-7 steps-button" *ngIf="(clickedCard !== '' || checkQuestions()) && currentStep === getNumberOfSteps()">
-        <button class="btn btn-secondary" (click)="nextStep()" *ngIf="currentStep === getNumberOfSteps()">{{ 'See my suggested offers >' | translate }}</button>
+        <button type="button" class="btn btn-secondary" (click)="nextStep()" *ngIf="currentStep === getNumberOfSteps()">{{ 'See my suggested offers >' | translate }}</button>
       </div>
     </div>
   </div>

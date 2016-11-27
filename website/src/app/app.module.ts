@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
 import { TranslateModule } from 'ng2-translate';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { AppComponent } from './app.component';
 import { InteractiveFormComponent } from './interactive-form/interactive-form.component';
@@ -15,6 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
 import { Http } from '@angular/http';
 import { TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -26,7 +28,8 @@ export function createTranslateLoader(http: Http) {
         InteractiveFormComponent,
         NavbarComponent,
         InteractiveFormGeneratorComponent,
-        LandingPageComponent
+        LandingPageComponent,
+        HomePageComponent
     ],
     imports: [
         BrowserModule,
@@ -41,7 +44,8 @@ export function createTranslateLoader(http: Http) {
         })
     ],
     providers: [
-        Title
+        Title,
+        CookieService
     ],
     bootstrap: [AppComponent]
 })

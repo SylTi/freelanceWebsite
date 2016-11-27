@@ -10,10 +10,17 @@ declare var ga: any;
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.less']
+    styleUrls: ['./app.component.less'],
+    host: {
+        '(window:scroll)': 'onScroll($event)'
+    }
 })
 export class AppComponent {
     title = 'app works!';
+    isScrolled = false;
+    currPos: number = 0;
+    startPos: number = 0;
+    changePos: number = 100;
 
     constructor(
         private router: Router,
@@ -60,5 +67,14 @@ export class AppComponent {
 
     scrollTop(): void {
         window.scroll(0, 0);
+    }
+
+    onScroll(event): void {
+        this.currPos = (window.pageYOffset || event.target.scrollTop) - (event.target.clientTop || 0);
+        if(this.currPos >= this.changePos ) {
+            this.isScrolled = true;
+        } else {
+            this.isScrolled = false;
+        }
     }
 }

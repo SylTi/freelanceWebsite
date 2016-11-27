@@ -1,4 +1,4 @@
-import {Component, OnInit, transition} from "@angular/core";
+import {Component, OnInit, transition, Input} from "@angular/core";
 import {TranslateService} from "ng2-translate";
 
 @Component({
@@ -7,13 +7,14 @@ import {TranslateService} from "ng2-translate";
     styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent implements OnInit {
-
+    @Input() isScrolled: boolean;
     constructor(private translate: TranslateService) { }
 
     ngOnInit() {
     }
 
     changeLanguage(lang: string) {
+        console.log('isScroller: ', this.isScrolled);
         if (lang === 'en' || lang == 'fr')
             this.translate.use(lang);
     }

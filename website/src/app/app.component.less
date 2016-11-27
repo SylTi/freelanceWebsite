@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700,800);
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+@import "./../colors.less";
+
+:host /deep/ html {
+    font: 300 16px/1.8 'Raleway', sans-serif;
+    color: #666;
+    overflow-x: hidden;
+    background-color: @background-body;
+
+ }
+
+@media (max-width: 992px) {
+    :host /deep/ section {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    :host /deep/ section {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    :host /deep/ section {
+        font-size: 11px;
+    }
+}
+
+:host /deep/ h1, :host /deep/ h2, :host /deep/ h3, :host /deep/ h4, :host /deep/ h5, :host /deep/ h6, :host /deep/ .h4 {
+    font: 700 2.5em/1.2 Raleway, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    //margin: 5px 0 5px;
+    //color: #222;
+}
+:host /deep/ h2 {
+    font-size: 1.875em;
+    margin: 0 0 30px;
+}
+
+:host /deep/ h3,  :host /deep/ .h3 {
+    font-size: 1.5625em;
+    letter-spacing: 1px;
+    margin: 0 0 5px;
+}
+
+:host /deep/ .h3 {
+    font-weight: 300;
+}
+
+:host /deep/ h4, :host /deep/ .h4 {
+    font-size: 1.25em;
+    letter-spacing: 1px;
+}
+
+:host /deep/ .h4 {
+    text-transform: none;
+}
+
+:host /deep/ .h5 {
+    font-family: 'Raleway', sans-serif;
+    //letter-spacing: 1px;
+}
+:host /deep/ h5 {
+    font-size: 1.0625em;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+:host /deep/ h6 {
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 400;
+}

@@ -1,0 +1,111 @@
+@import "../../colors.less";
+
+#home {
+    color: #fff;
+    background-image: url(../assets/images/cover.jpg);
+    background-color: #222;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    //background-position: 50% 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    //bottom: 0;
+    position: relative;
+    //background-attachment: scroll;
+}
+
+.home-overlay {
+    background-color: rgba(44, 62, 80, 0.3);
+    background-image: url("../assets/images/pattern.png");
+    background-repeat: repeat;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    /*top: 76px;*/
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.intro {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+    padding: 0 15px;
+}
+
+.intro img {
+    border-radius: 50%;
+}
+
+.intro h1{
+    font-weight: 800;
+}
+
+.start {
+    font-family: Raleway, "Times New Roman", Times, sans-serif;
+    //font-size: 16px;
+    font-style: normal;
+    text-transform: none;
+    margin: 15px 0;
+}
+
+
+.scroll-down {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-left: -15px;
+    display: block;
+    z-index: 10;
+    text-align: center;
+}
+
+.scroll-down span{
+    position: relative;
+    color: #fff;
+    -webkit-animation-name: drop;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+    animation-name: drop;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+@-webkit-keyframes drop	{
+    0%   { top:0px;  opacity: 0;}
+    30%  { top:10px; opacity: 1;}
+    100% { top:25px; opacity: 0;}
+}
+
+@keyframes drop	{
+    0%   { top:0px;  opacity: 0;}
+    30%  { top:10px; opacity: 1;}
+    100% { top:25px; opacity: 0;}
+}
+
+section {
+    //height: calc(~"100vh - 55px");
+}

@@ -90,21 +90,20 @@ export class InteractiveFormGeneratorComponent implements OnInit {
     getBootStrapClass() {
         let length = this.getCurrentStepItems().length;
         if (length === 2)
-            return 'col-md-6';
+            return 'col-lg-6';
         else if (length === 3)
-            return 'col-md-4';
-        return 'col-md-3';
+            return 'col-lg-4';
+        return 'col-lg-3';
     }
 
     getCurrentStep() {
-
         if (!this.results.length)
             return this.steps[0];
         let currentStepReal = this.currentStep-2 >= 0 ? this.currentStep-2 : 0;
         let step = this.steps.find(
             (item) => {
                 if (!this.results[currentStepReal])
-                { console.log(currentStepReal); return false}
+                    return false;
                 return (item.parentResult === this.results[currentStepReal][0]);
             });
         if (!step)

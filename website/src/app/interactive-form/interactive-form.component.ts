@@ -4,6 +4,9 @@ import { Step } from "./step";
 import { Card } from "./card";
 import { Question } from "./question";
 import { TranslateService } from 'ng2-translate';
+import { Router } from "@angular/router";
+import { CookieService } from 'angular2-cookie/core';
+
 
 @Component({
     selector: 'app-interactive-form',
@@ -16,7 +19,9 @@ export class InteractiveFormComponent implements OnInit {
 
     constructor(
         private titleService: Title,
-        private translationService: TranslateService
+        private translationService: TranslateService,
+        private router: Router,
+        private cookieService: CookieService
     ) {
 
         let itemsStepOne = [
@@ -54,6 +59,8 @@ export class InteractiveFormComponent implements OnInit {
 
     getResults(formResults: Array<Array<string>>) {
         this.formResults = formResults;
+        this.cookieService.put("SylTi.eu", JSON.stringify(this.formResults), 2147483647)
+        this.router.navigate(['/home']);
     }
 
     ngOnInit() {
