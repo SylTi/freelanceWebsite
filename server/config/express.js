@@ -27,7 +27,7 @@ module.exports = function(app, config) {
     // app.use(express.static(config.root + '/public'));
     app.use(express.static(__dirname+'/../../client/dist'));
     app.use('/assets',express.static(__dirname+'/../../site/assets', { maxAge: '2h' }));
-    app.use('/.well-know',express.static(__dirname+'/../../site/assets/certif', { dotfiles: 'allow' }));
+   // app.use('/.well-know',express.static(__dirname+'/../../site/assets/certif', { dotfiles: 'allow' }));
     app.use(methodOverride());
 
     var controllers = glob.sync(config.root + '/app/controllers/*.js');
